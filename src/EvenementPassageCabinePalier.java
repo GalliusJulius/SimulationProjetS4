@@ -20,7 +20,12 @@ public class EvenementPassageCabinePalier extends Evenement {
 		Cabine cabine = immeuble.cabine;
 		assert ! cabine.porteOuverte;
 		assert étage.numéro() != cabine.étage.numéro();
-		
+		if(cabine.étage.numéro() == immeuble.étageLePlusBas().numéro()) {
+			cabine.changerIntention('^');
+		}
+		else if(cabine.étage.numéro() == immeuble.étageLePlusHaut().numéro()){
+			cabine.changerIntention('v');
+		}
 		if((cabine.intention() == 'v') && (cabine.étage.numéro() != immeuble.étageLePlusBas().numéro()))
 			cabine.étage = immeuble.étage(cabine.étage.numéro()-1);
 		else if((cabine.intention() == '^') && (cabine.étage.numéro() != immeuble.étageLePlusHaut().numéro()))
