@@ -21,7 +21,5 @@ public class EvenementPassageCabinePalier extends Evenement {
 	assert ! cabine.porteOuverte;
 	assert étage.numéro() != cabine.étage.numéro();
 
-	notYetImplemented();
-
     }
 }
