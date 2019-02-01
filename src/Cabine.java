@@ -112,17 +112,41 @@ public class Cabine extends Global {
 	
     
     public int nbPassagersDansCabine() {
-    	return tableauPassager.length;
+    	int nb = 0;
+    	
+    	for(int i = 0; i < tableauPassager.length; i++) {
+    		if(tableauPassager[i] != null) {
+    			nb++;
+    		}
+    	}
+    	
+    	return nb;
+    }
+    
+    public boolean cabinePleine() {
+    	return this.nbPassagersDansCabine() == tableauPassager.length;
     }
     
     public int nbPassagersVeulentDescendre(int numEtage) {
     	int nbP = 0;
     	
-    	/*for(int i = 0; i < tableauPassager.length; i++) {
-    		if() {
+    	for(int i = 0; i < tableauPassager.length; i++) {
+    		if(tableauPassager[i].numéroDestination() == numEtage) {
     			nbP++;
     		}
-    	}*/
+    	}
+    	
+    	return nbP;
+    }
+    
+    public int nbPassagersPalier(int numEtage) {
+    	int nbP = 0;
+    	
+    	for(int i = 0; i < tableauPassager.length; i++) {
+    		if((tableauPassager[i].numéroDepart() == numEtage) && (! this.cabinePleine())) {
+    			nbP++;
+    		}
+    	}
     	
     	return nbP;
     }
