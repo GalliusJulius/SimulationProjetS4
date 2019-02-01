@@ -110,4 +110,20 @@ public class Cabine extends Global {
 	return false;
     }
 	
+    
+    public int nbPassagersDansCabine() {
+    	return tableauPassager.length;
+    }
+    
+    public int nbPassagersVeulentDescendre(int numEtage) {
+    	int nbP = 0;
+    	
+    	/*for(int i = 0; i < tableauPassager.length; i++) {
+    		if() {
+    			nbP++;
+    		}
+    	}*/
+    	
+    	return nbP;
+    }
 }
