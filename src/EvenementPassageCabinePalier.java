@@ -21,11 +21,13 @@ public class EvenementPassageCabinePalier extends Evenement {
 		assert ! cabine.porteOuverte;
 		assert étage.numéro() != cabine.étage.numéro();
 		
-		if(cabine.intention() == 'v')
+		if((cabine.intention() == 'v') && (cabine.étage.numéro() != immeuble.étageLePlusBas().numéro()))
 			cabine.étage = immeuble.étage(cabine.étage.numéro()-1);
-		else
+		else if((cabine.intention() == '^') && (cabine.étage.numéro() != immeuble.étageLePlusHaut().numéro()))
 			cabine.étage = immeuble.étage(cabine.étage.numéro()+1);
 
-		echeancier.ajouter(new EvenementPassageCabinePalier(2, cabine.étage));
+		echeancier.ajouter(new EvenementPassageCabinePalier(echeancier.tempsPourBougerLaCabineDUnEtage, cabine.étage)); // étage.arrivéeSuivante()
+		System.out.println(étage.arrivéeSuivante());
+		System.out.println(echeancier.tempsPourBougerLaCabineDUnEtage);
     }
 }
