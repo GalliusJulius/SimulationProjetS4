@@ -36,9 +36,9 @@ public class EvenementPassageCabinePalier extends Evenement {
 		}
 		
 		if((cabine.intention() == 'v') && (cabine.étage.numéro() != immeuble.étageLePlusBas().numéro()))
-			echeancier.ajouter(new EvenementPassageCabinePalier(echeancier.tempsPourBougerLaCabineDUnEtage, immeuble.étage(cabine.étage.numéro()-1))); // étage.arrivéeSuivante()
+			echeancier.ajouter(new EvenementPassageCabinePalier(date + echeancier.tempsPourBougerLaCabineDUnEtage, immeuble.étage(cabine.étage.numéro()-1))); // étage.arrivéeSuivante() ?
 		else if((cabine.intention() == '^') && (cabine.étage.numéro() != immeuble.étageLePlusHaut().numéro()))
-			echeancier.ajouter(new EvenementPassageCabinePalier(echeancier.tempsPourBougerLaCabineDUnEtage, immeuble.étage(cabine.étage.numéro()+1))); // étage.arrivéeSuivante()
+			echeancier.ajouter(new EvenementPassageCabinePalier(date + echeancier.tempsPourBougerLaCabineDUnEtage, immeuble.étage(cabine.étage.numéro()+1))); // étage.arrivéeSuivante() ?
 		
 		//System.out.println(étage.arrivéeSuivante());
 		//date--;
