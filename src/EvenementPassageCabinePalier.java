@@ -24,23 +24,29 @@ public class EvenementPassageCabinePalier extends Evenement {
 		
 		long tps;
 		
-		//if(!cabine.passagersVeulentDescendre()) {
-		tps = date + echeancier.tempsPourBougerLaCabineDUnEtage;
-		/*} else {
-			tps = date + echeancier.tempsPourBougerLaCabineDUnEtage + echeancier.tempsPourEntrerOuSortirDeLaCabine * (cabine.);
-		}*/
+		if(!cabine.passagersVeulentDescendre()) {
+			tps = date + Global.tempsPourBougerLaCabineDUnEtage;
+		} else {
+			tps = date + Global.tempsPourBougerLaCabineDUnEtage + Global.tempsPourEntrerOuSortirDeLaCabine * cabine.nbPassagersVeulentDescendre(cabine.étage.numéro()); // +1 ?
+			// étage.arrivéeSuivante() ?
+			echeancier.ajouter(new EvenementOuverturePorteCabine(date+1));
+			echeancier.ajouter(new EvenementFermeturePorteCabine(date+1+(Global.tempsPourEntrerOuSortirDeLaCabine * cabine.nbPassagersVeulentDescendre(cabine.étage.numéro())) ));
+		}
+		// TODO vérifier si des passagers veulent monter
 		
 		if((cabine.intention() == 'v') && (cabine.étage.numéro() != immeuble.étageLePlusBas().numéro()))
 			cabine.étage = immeuble.étage(cabine.étage.numéro()-1);
 		else if((cabine.intention() == '^') && (cabine.étage.numéro() != immeuble.étageLePlusHaut().numéro()))
 			cabine.étage = immeuble.étage(cabine.étage.numéro()+1);
-
+		
+		////
 		if(cabine.étage.numéro() == immeuble.étageLePlusBas().numéro()) {
 			cabine.changerIntention('^');
 		}
 		else if(cabine.étage.numéro() == immeuble.étageLePlusHaut().numéro()){
 			cabine.changerIntention('v');
 		}
+		////
 		
 		if((cabine.intention() == 'v') && (cabine.étage.numéro() != immeuble.étageLePlusBas().numéro()))
 			echeancier.ajouter(new EvenementPassageCabinePalier(tps, immeuble.étage(cabine.étage.numéro()-1))); // étage.arrivéeSuivante() ?
@@ -49,6 +55,7 @@ public class EvenementPassageCabinePalier extends Evenement {
 		
 		//System.out.println(étage.arrivéeSuivante());
 		//date--;
+		System.out.println(date);
 		//System.out.println(echeancier.tempsPourBougerLaCabineDUnEtage);
     }
 }
