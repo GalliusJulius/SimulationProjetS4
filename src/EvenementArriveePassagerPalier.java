@@ -16,12 +16,12 @@ public class EvenementArriveePassagerPalier extends Evenement {
     }
 
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
-	assert étage != null;
-	assert immeuble.étage(étage.numéro()) == étage;
-	Passager p = new Passager(date, étage, immeuble);
-
-	notYetImplemented();
+		assert étage != null;
+		assert immeuble.étage(étage.numéro()) == étage;
+		Passager p = new Passager(date, étage, immeuble);
 	
+		étage.ajouter(p);
+		
     }
 
 }

@@ -32,14 +32,14 @@ public class EvenementPassageCabinePalier extends Evenement {
 			echeancier.ajouter(new EvenementOuverturePorteCabine(date+1));
 			echeancier.ajouter(new EvenementFermeturePorteCabine(date+1+(Global.tempsPourEntrerOuSortirDeLaCabine * cabine.nbPassagersVeulentDescendre(cabine.étage.numéro())) ));
 		}
-		// TODO vérifier si des passagers veulent monter
+		// TODO vérifier si des passagers veulent monter ?
 		
 		if((cabine.intention() == 'v') && (cabine.étage.numéro() != immeuble.étageLePlusBas().numéro()))
 			cabine.étage = immeuble.étage(cabine.étage.numéro()-1);
 		else if((cabine.intention() == '^') && (cabine.étage.numéro() != immeuble.étageLePlusHaut().numéro()))
 			cabine.étage = immeuble.étage(cabine.étage.numéro()+1);
 		
-		////
+		//// A enlever dans les futures versions
 		if(cabine.étage.numéro() == immeuble.étageLePlusBas().numéro()) {
 			cabine.changerIntention('^');
 		}
@@ -54,8 +54,7 @@ public class EvenementPassageCabinePalier extends Evenement {
 			echeancier.ajouter(new EvenementPassageCabinePalier(tps, immeuble.étage(cabine.étage.numéro()+1))); // étage.arrivéeSuivante() ?
 		
 		//System.out.println(étage.arrivéeSuivante());
-		//date--;
-		System.out.println(date);
+		//System.out.println(date);
 		//System.out.println(echeancier.tempsPourBougerLaCabineDUnEtage);
     }
 }
