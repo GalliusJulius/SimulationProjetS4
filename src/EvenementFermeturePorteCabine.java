@@ -15,13 +15,14 @@ public class EvenementFermeturePorteCabine extends Evenement {
     }
 
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
-	Cabine cabine = immeuble.cabine;
-	assert cabine.porteOuverte;
-	cabine.porteOuverte = false;
-
-	notYetImplemented();
-
-	assert ! cabine.porteOuverte;
+		Cabine cabine = immeuble.cabine;
+		assert cabine.porteOuverte;
+		cabine.porteOuverte = false;
+	
+		cabine.porteOuverte = false;
+		// TODO faire descendre les passagers
+	
+		assert ! cabine.porteOuverte;
     }
 
 

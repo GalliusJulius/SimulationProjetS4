@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Etage extends Global {
     /* Dans cette classe, vous pouvez ajouter/enlever/modifier/corriger les méthodes, mais vous ne
@@ -18,7 +19,7 @@ public class Etage extends Global {
     /* Pour cet étage.
      */
 
-    private ArrayList<Passager> passagers = new ArrayList<Passager>();
+    private LinkedList<Passager> passagers = new LinkedList<Passager>();
     /* Les passagers qui attendent devant la porte et qui espèrent pouvoir monter
        dans la cabine.
        Comme toute les collections, il ne faut pas l'exporter.
@@ -115,7 +116,48 @@ public class Etage extends Global {
     }
 
     public boolean aDesPassagers(){
-	return (!passagers.isEmpty());
+    	return (!passagers.isEmpty());
+    }
+    
+    public Passager getPremierPassager() {
+    	/*if(aDesPassagers()) {
+    		int i = 0;
+    		while(passagers.get(i) == null) {
+    			i++;
+    		}
+    		return passagers.get(i);
+    	}
+    	
+    	return null;*/
+    	
+    	return passagers.getFirst();
+    }
+    
+    public void suppPremierPassager() {
+    	/*if(aDesPassagers()) {
+    		int i = 0;
+    		while(passagers.get(i) == null) {
+    			i++;
+    		}
+    		passagers.remove(passagers.get(i));
+    	}*/
+    	
+    	passagers.removeFirst();
+    	
+    }
+    
+    public int nbPassagers() {
+    	return passagers.size();
+    }
+    
+    public int nbPassagersEtage(int num) {
+    	int res = 0;
+    	for(int i = 0; i < passagers.size(); i++) {
+    		if(passagers.get(i).étageDépart().numéro() == num)
+    			res++;
+    	}
+    	
+    	return res;
     }
 
 }

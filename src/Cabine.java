@@ -131,7 +131,7 @@ public class Cabine extends Global {
     	int nbP = 0;
     	
     	for(int i = 0; i < tableauPassager.length; i++) {
-    		if(tableauPassager[i].numéroDestination() == numEtage) {
+    		if((tableauPassager[i] != null) && (tableauPassager[i].numéroDestination() == numEtage)) {
     			nbP++;
     		}
     	}

@@ -12,13 +12,25 @@ public class EvenementOuverturePorteCabine extends Evenement {
     }
 
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
-	Cabine cabine = immeuble.cabine;
-	Etage étage = cabine.étage;
-	assert ! cabine.porteOuverte;
-
-	notYetImplemented();
+		Cabine cabine = immeuble.cabine;
+		Etage étage = cabine.étage;
+		assert ! cabine.porteOuverte;
 	
-	assert cabine.porteOuverte;
+		cabine.porteOuverte = true;
+		int i = 0;
+		
+		while((! cabine.cabinePleine()) && (étage.aDesPassagers()) && (i < étage.nbPassagersEtage(étage.numéro()))) {
+			assert étage.getPremierPassager() != null;
+			boolean rep = cabine.faireMonterPassager(étage.getPremierPassager());
+			if(rep)
+				étage.suppPremierPassager();
+			i++;
+			System.out.println(i);
+		}
+		
+		echeancier.ajouter(new EvenementFermeturePorteCabine(date + i*tempsPourEntrerOuSortirDeLaCabine + tempsPourOuvrirOuFermerLesPortes));
+		
+		assert cabine.porteOuverte;
     }
 
 }

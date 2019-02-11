@@ -24,13 +24,13 @@ public class EvenementPassageCabinePalier extends Evenement {
 		
 		long tps;
 		
-		if(!cabine.passagersVeulentDescendre()) {
-			tps = date + Global.tempsPourBougerLaCabineDUnEtage;
-		} else {
-			tps = date + Global.tempsPourBougerLaCabineDUnEtage + Global.tempsPourEntrerOuSortirDeLaCabine * cabine.nbPassagersVeulentDescendre(cabine.étage.numéro()); // +1 ?
+		if((cabine.passagersVeulentDescendre()) || (étage.aDesPassagers())) {
+			tps = date + Global.tempsPourBougerLaCabineDUnEtage + Global.tempsPourEntrerOuSortirDeLaCabine * (cabine.nbPassagersVeulentDescendre(cabine.étage.numéro()) + étage.nbPassagersEtage(étage.numéro()) + tempsPourOuvrirOuFermerLesPortes); // +1 ?
 			// étage.arrivéeSuivante() ?
 			echeancier.ajouter(new EvenementOuverturePorteCabine(date+1));
-			echeancier.ajouter(new EvenementFermeturePorteCabine(date+1+(Global.tempsPourEntrerOuSortirDeLaCabine * cabine.nbPassagersVeulentDescendre(cabine.étage.numéro())) ));
+			//echeancier.ajouter(new EvenementFermeturePorteCabine(date+1+(Global.tempsPourEntrerOuSortirDeLaCabine * cabine.nbPassagersVeulentDescendre(cabine.étage.numéro())) ));
+		} else {
+			tps = date + Global.tempsPourBougerLaCabineDUnEtage;
 		}
 		// TODO vérifier si des passagers veulent monter ?
 		

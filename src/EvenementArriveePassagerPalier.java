@@ -21,6 +21,7 @@ public class EvenementArriveePassagerPalier extends Evenement {
 		Passager p = new Passager(date, étage, immeuble);
 	
 		étage.ajouter(p);
+		echeancier.ajouter(new EvenementArriveePassagerPalier(date + étage.arrivéeSuivante(), étage));
 		
     }
 
