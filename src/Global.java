@@ -24,7 +24,7 @@ public class Global {
        pas de capteur de poids en cas de surcharge.
     */
 
-    static final int délaiDePatienceAvantSportif = 50;
+    static final int délaiDePatienceAvantSportif = 60;
     /* Temps au bout duquel un passager décide finalement de partir à pieds.
     */
 

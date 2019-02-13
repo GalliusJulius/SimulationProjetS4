@@ -16,10 +16,12 @@ public class EvenementOuverturePorteCabine extends Evenement {
 		Etage étage = cabine.étage;
 		assert ! cabine.porteOuverte;
 	
-		
+	
 		int i = 0;
 		cabine.porteOuverte = true;
+		//A revoir
 		while(cabine.porteOuverte && (! cabine.cabinePleine()) && (étage.aDesPassagers()) && (i < étage.nbPassagersEtage(étage.numéro()))) {
+			System.out.println(cabine.porteOuverte + " | "+ ! cabine.cabinePleine()+ " | "+étage.aDesPassagers()+ " | "+(i < étage.nbPassagersEtage(étage.numéro())));
 			assert étage.getPremierPassager() != null;
 			boolean rep = cabine.faireMonterPassager(étage.getPremierPassager());
 			if(rep)
