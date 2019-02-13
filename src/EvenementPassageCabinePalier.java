@@ -27,7 +27,8 @@ public class EvenementPassageCabinePalier extends Evenement {
 		if((cabine.passagersVeulentDescendre()) || (étage.aDesPassagers())) {
 			tps = date + Global.tempsPourBougerLaCabineDUnEtage + Global.tempsPourEntrerOuSortirDeLaCabine * (cabine.nbPassagersVeulentDescendre(cabine.étage.numéro()) + étage.nbPassagersEtage(étage.numéro()) + tempsPourOuvrirOuFermerLesPortes); // +1 ?
 			// étage.arrivéeSuivante() ?
-			echeancier.ajouter(new EvenementOuverturePorteCabine(date));
+			//géré en dessous
+			//echeancier.ajouter(new EvenementOuverturePorteCabine(date+1));
 			//echeancier.ajouter(new EvenementFermeturePorteCabine(date+1+(Global.tempsPourEntrerOuSortirDeLaCabine * cabine.nbPassagersVeulentDescendre(cabine.étage.numéro())) ));
 		} else {
 			tps = date + Global.tempsPourBougerLaCabineDUnEtage;
@@ -52,6 +53,24 @@ public class EvenementPassageCabinePalier extends Evenement {
 			echeancier.ajouter(new EvenementPassageCabinePalier(tps, immeuble.étage(cabine.étage.numéro()-1))); // étage.arrivéeSuivante() ?
 		else if((cabine.intention() == '^') && (cabine.étage.numéro() != immeuble.étageLePlusHaut().numéro()))
 			echeancier.ajouter(new EvenementPassageCabinePalier(tps, immeuble.étage(cabine.étage.numéro()+1))); // étage.arrivéeSuivante() ?
+		
+		//Gestion de l'ouverture des portes + intention
+		
+		if(Global.modeParfait && cabine.nbPassagersDansCabine() == 0 && étage.aDesPassagers()) {
+			echeancier.ajouter(new EvenementOuverturePorteCabine(date));
+			if(cabine.intention() != étage.getPremierPassager().sens()) {
+				cabine.changerIntention(étage.getPremierPassager().sens());
+			}
+		}
+		else if(Global.modeParfait && étage.aDesPassagers() && (cabine.intention() == étage.getPremierPassager().sens())){
+			echeancier.ajouter(new EvenementOuverturePorteCabine(date));
+		}
+		else if(!Global.modeParfait && étage.aDesPassagers()) {
+			echeancier.ajouter(new EvenementOuverturePorteCabine(date));
+		}
+		else if(cabine.passagersVeulentDescendre()) {
+			echeancier.ajouter(new EvenementOuverturePorteCabine(date));
+		}
 		
 		//System.out.println(étage.arrivéeSuivante());
 		//System.out.println(date);
