@@ -9,7 +9,7 @@ public class Cabine extends Global {
 
     private char intention; // 'v' ou '^'
 
-    private Passager[] tableauPassager;
+    public Passager[] tableauPassager;
     /* Ceux qui sont actuellement dans la Cabine. On ne décale jamais les élements.
        Comme toute les collections, il ne faut pas l'exporter.
        Quand on cherche une place libre, on fait le parcours de la gauche vers la droite.
@@ -84,7 +84,7 @@ public class Cabine extends Global {
 	while(i>=0){
 	    if(tableauPassager[i]!=null){
 		assert transporte(tableauPassager[i]);
-		if(tableauPassager[i].étageDestination() == étage){
+		if(tableauPassager[i].étageDestination() == étage){ // Modif. ?
 		    immeuble.ajouterCumul(d-tableauPassager[i].dateDépart());
 		    immeuble.nombreTotalDesPassagersSortis++;
 		    tableauPassager[i]=null; 

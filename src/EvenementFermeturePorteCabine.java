@@ -17,10 +17,16 @@ public class EvenementFermeturePorteCabine extends Evenement {
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
 		Cabine cabine = immeuble.cabine;
 		assert cabine.porteOuverte;
+		
+		if(cabine.tableauPassager[0] != null)
+			System.out.println(cabine.tableauPassager[0].numéroDestination());
+		System.out.println(cabine.passagersVeulentDescendre());
+		//cabine.faireDescendrePassagers(immeuble, this.date);
+		if(cabine.passagersVeulentDescendre()) {
+			cabine.faireDescendrePassagers(immeuble, this.date);
+		}
+		
 		cabine.porteOuverte = false;
-	
-		cabine.porteOuverte = false;
-		// TODO faire descendre les passagers
 	
 		assert ! cabine.porteOuverte;
     }

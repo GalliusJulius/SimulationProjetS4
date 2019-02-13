@@ -15,7 +15,7 @@ public class Global {
     
     static final long tempsPourOuvrirOuFermerLesPortes = 5;
     
-    static final long tempsPourBougerLaCabineDUnEtage = 6;
+    static final long tempsPourBougerLaCabineDUnEtage = 8;
     /* La cabine se déplace toujours à vitesse constante. */
     
     static final int nombreDePlacesDansLaCabine = 4;
