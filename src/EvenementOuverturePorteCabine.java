@@ -19,7 +19,7 @@ public class EvenementOuverturePorteCabine extends Evenement {
 		
 		int i = 0;
 		cabine.porteOuverte = true;
-		while(cabine.porteOuverte && (! cabine.cabinePleine()) && (étage.aDesPassagers()) && (i < étage.nbPassagersEtage(étage.numéro()))) {
+		while(cabine.porteOuverte && (! cabine.cabinePleine()) && (i < étage.nbPassagersEtage(étage.numéro()))) {
 			assert étage.getPremierPassager() != null;
 			boolean rep = cabine.faireMonterPassager(étage.getPremierPassager());
 			if(rep)
