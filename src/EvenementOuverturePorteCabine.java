@@ -20,16 +20,17 @@ public class EvenementOuverturePorteCabine extends Evenement {
 		int i = 0;
 		cabine.porteOuverte = true;
 		//A revoir
-		while(cabine.porteOuverte && (! cabine.cabinePleine()) && (étage.aDesPassagers()) && (i < étage.nbPassagersEtage(étage.numéro()))) {
-			System.out.println(cabine.porteOuverte + " | "+ ! cabine.cabinePleine()+ " | "+étage.aDesPassagers()+ " | "+(i < étage.nbPassagersEtage(étage.numéro())));
+		while(cabine.porteOuverte && (! cabine.cabinePleine()) && (étage.aDesPassagers())) {
+			System.out.println( cabine.getPremierPassager()+" | "+ cabine.porteOuverte + " | "+ ! cabine.cabinePleine()+ " | "+étage.aDesPassagers()+ " | "+(i < étage.nbPassagersEtage(étage.numéro())));
 			assert étage.getPremierPassager() != null;
 			boolean rep = cabine.faireMonterPassager(étage.getPremierPassager());
+			System.out.println(rep);
 			if(rep)
 				étage.suppPremierPassager();
-			i++;
+			//i++;
 			System.out.println(i);
 		}
-		
+		System.out.println(cabine.porteOuverte + " | "+ ! cabine.cabinePleine()+ " | "+étage.aDesPassagers()+ " | "+(i < étage.nbPassagersEtage(étage.numéro())));
 		echeancier.ajouter(new EvenementFermeturePorteCabine(date + i*tempsPourEntrerOuSortirDeLaCabine + tempsPourOuvrirOuFermerLesPortes));
 		
 		assert cabine.porteOuverte;

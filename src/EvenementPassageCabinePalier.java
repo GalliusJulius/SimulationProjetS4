@@ -74,6 +74,7 @@ public class EvenementPassageCabinePalier extends Evenement {
 		}
 		
 		if(cabine.nbPassagersDansCabine() != 0) {
+			System.out.println(cabine.getPremierPassager());
 			cabine.changerIntention(cabine.getPremierPassager().numéroDestination() > étage.numéro() ? '^' : 'v');
 		}
 		
