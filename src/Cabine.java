@@ -64,11 +64,6 @@ public class Cabine extends Global {
     public boolean faireMonterPassager(Passager p) { 
 	assert p != null;
 	assert ! transporte(p);
-	if (isModeParfait()) {
-	    if (intention != p.sens()) {
-		return false;
-	    }
-	}
 	for (int i=0 ; i<tableauPassager.length ; i++) {
 	    if(tableauPassager[i]==null){
 		tableauPassager[i]=p;
@@ -84,7 +79,7 @@ public class Cabine extends Global {
 	while(i>=0){
 	    if(tableauPassager[i]!=null){
 		assert transporte(tableauPassager[i]);
-		if(tableauPassager[i].étageDestination() == étage){ // Modif. ?
+		if(tableauPassager[i].étageDestination() == étage){
 		    immeuble.ajouterCumul(d-tableauPassager[i].dateDépart());
 		    immeuble.nombreTotalDesPassagersSortis++;
 		    tableauPassager[i]=null; 
@@ -152,7 +147,12 @@ public class Cabine extends Global {
     }
     
     public Passager getPremierPassager() {
-    	if(tableauPassager.length != 0) return tableauPassager[0];
-    	else return null;
+    	int i;
+    	for(i = 0; i < tableauPassager.length; i++) {
+    		if(tableauPassager[i] != null)
+    			return tableauPassager[i]; 
+    	}
+    		
+    	return null;
     }
 }

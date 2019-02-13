@@ -19,7 +19,7 @@ public class Etage extends Global {
     /* Pour cet étage.
      */
 
-    private LinkedList<Passager> passagers = new LinkedList<Passager>();
+    private ArrayList<Passager> passagers = new ArrayList<Passager>();
     /* Les passagers qui attendent devant la porte et qui espèrent pouvoir monter
        dans la cabine.
        Comme toute les collections, il ne faut pas l'exporter.
@@ -130,7 +130,7 @@ public class Etage extends Global {
     	
     	return null;*/
     	
-    	return passagers.getFirst();
+    	return passagers.get(0);
     }
     
     public void suppPremierPassager() {
@@ -142,7 +142,7 @@ public class Etage extends Global {
     		passagers.remove(passagers.get(i));
     	}*/
     	
-    	passagers.removeFirst();
+    	passagers.remove(0);
     	
     }
     

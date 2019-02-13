@@ -73,7 +73,10 @@ public class EvenementPassageCabinePalier extends Evenement {
 			echeancier.ajouter(new EvenementOuverturePorteCabine(date));
 		}
 		
+		System.out.println(cabine.nbPassagersDansCabine());
+		
 		if(cabine.nbPassagersDansCabine() != 0) {
+			System.out.println(cabine.getPremierPassager());
 			cabine.changerIntention(cabine.getPremierPassager().numéroDestination() > étage.numéro() ? '^' : 'v');
 		}
 		
