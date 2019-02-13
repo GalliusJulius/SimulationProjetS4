@@ -150,4 +150,9 @@ public class Cabine extends Global {
     	
     	return nbP;
     }
+    
+    public Passager getPremierPassager() {
+    	if(tableauPassager.length != 0) return tableauPassager[0];
+    	else return null;
+    }
 }

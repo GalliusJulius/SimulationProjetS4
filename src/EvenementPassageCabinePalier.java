@@ -62,14 +62,19 @@ public class EvenementPassageCabinePalier extends Evenement {
 				cabine.changerIntention(étage.getPremierPassager().sens());
 			}
 		}
-		else if(Global.modeParfait && étage.aDesPassagers() && (cabine.intention() == étage.getPremierPassager().sens())){
+		else if(Global.modeParfait && étage.aDesPassagers() && (cabine.intention() == étage.getPremierPassager().sens()) && !cabine.cabinePleine()){
 			echeancier.ajouter(new EvenementOuverturePorteCabine(date));
 		}
 		else if(!Global.modeParfait && étage.aDesPassagers()) {
 			echeancier.ajouter(new EvenementOuverturePorteCabine(date));
 		}
 		else if(cabine.passagersVeulentDescendre()) {
+			System.out.println(étage);
 			echeancier.ajouter(new EvenementOuverturePorteCabine(date));
+		}
+		
+		if(cabine.nbPassagersDansCabine() != 0) {
+			cabine.changerIntention(cabine.getPremierPassager().numéroDestination() > étage.numéro() ? '^' : 'v');
 		}
 		
 		//System.out.println(étage.arrivéeSuivante());

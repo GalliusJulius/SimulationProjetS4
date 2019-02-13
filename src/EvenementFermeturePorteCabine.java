@@ -18,13 +18,10 @@ public class EvenementFermeturePorteCabine extends Evenement {
 		Cabine cabine = immeuble.cabine;
 		assert cabine.porteOuverte;
 		
-		if(cabine.tableauPassager[0] != null)
-			System.out.println(cabine.tableauPassager[0].numéroDestination());
-		System.out.println(cabine.passagersVeulentDescendre());
-		//cabine.faireDescendrePassagers(immeuble, this.date);
-		if(cabine.passagersVeulentDescendre()) {
+		if(cabine.passagersVeulentDescendre() && cabine.porteOuverte ) {
 			cabine.faireDescendrePassagers(immeuble, this.date);
 		}
+		
 		
 		cabine.porteOuverte = false;
 	
