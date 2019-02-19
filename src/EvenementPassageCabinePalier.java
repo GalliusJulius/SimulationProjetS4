@@ -69,15 +69,15 @@ public class EvenementPassageCabinePalier extends Evenement {
 			echeancier.ajouter(new EvenementOuverturePorteCabine(date));
 		}
 		else if(cabine.passagersVeulentDescendre()) {
-			System.out.println(étage);
+			//System.out.println(étage);
 			echeancier.ajouter(new EvenementOuverturePorteCabine(date));
 		}
 		
-		System.out.println(cabine.nbPassagersDansCabine());
+		//System.out.println(cabine.nbPassagersDansCabine());
 		
 		if(cabine.nbPassagersDansCabine() != 0) {
-			System.out.println(cabine.getPremierPassager());
-			cabine.changerIntention(cabine.getPremierPassager().numéroDestination() > étage.numéro() ? '^' : 'v');
+			//System.out.println(cabine.getPremierPassager());
+			cabine.changerIntention(cabine.getPremierPassager(this.date).numéroDestination() > étage.numéro() ? '^' : 'v');
 		}
 		
 		//System.out.println(étage.arrivéeSuivante());

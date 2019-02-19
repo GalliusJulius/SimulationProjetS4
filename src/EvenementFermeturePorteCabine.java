@@ -18,11 +18,6 @@ public class EvenementFermeturePorteCabine extends Evenement {
 		Cabine cabine = immeuble.cabine;
 		assert cabine.porteOuverte;
 		
-		if(cabine.passagersVeulentDescendre() && cabine.porteOuverte ) {
-			cabine.faireDescendrePassagers(immeuble, this.date);
-		}
-		
-		
 		cabine.porteOuverte = false;
 	
 		assert ! cabine.porteOuverte;

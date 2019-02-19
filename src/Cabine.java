@@ -146,13 +146,19 @@ public class Cabine extends Global {
     	return nbP;
     }
     
-    public Passager getPremierPassager() {
-    	int i;
+    // Passager entré en dernier dans la cabine (celui qui a attendu le plus longtemps) :
+    public Passager getPremierPassager(long date) {
+    	int i, numP = 0;
+    	long dateMax = 0;
     	for(i = 0; i < tableauPassager.length; i++) {
-    		if(tableauPassager[i] != null)
-    			return tableauPassager[i]; 
+    		if(tableauPassager[i] != null) {
+    			if(date - tableauPassager[i].dateDépart() > dateMax) {
+    				dateMax = date - tableauPassager[i].dateDépart();
+    				numP = i;
+    			}
+    		} 
     	}
-    		
-    	return null;
+    	
+    	return tableauPassager[numP];
     }
 }
