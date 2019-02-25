@@ -19,7 +19,11 @@ public class EvenementFermeturePorteCabine extends Evenement {
 		assert cabine.porteOuverte;
 		
 		cabine.porteOuverte = false;
-	
+		long tps = date + Global.tempsPourBougerLaCabineDUnEtage;
+		if((cabine.intention() == 'v') && (cabine.étage.numéro() != immeuble.étageLePlusBas().numéro()))
+			echeancier.ajouter(new EvenementPassageCabinePalier(tps, immeuble.étage(cabine.étage.numéro()-1))); // étage.arrivéeSuivante() ?
+		else if((cabine.intention() == '^') && (cabine.étage.numéro() != immeuble.étageLePlusHaut().numéro()))
+			echeancier.ajouter(new EvenementPassageCabinePalier(tps, immeuble.étage(cabine.étage.numéro()+1))); // étage.arrivéeSuivante() ?
 		assert ! cabine.porteOuverte;
     }
 

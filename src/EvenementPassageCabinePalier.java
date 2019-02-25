@@ -50,7 +50,7 @@ public class EvenementPassageCabinePalier extends Evenement {
 		}
 		////
 		
-		if(!cabine.étage.aDesPassagers()) {
+		if(!cabine.étage.aDesPassagers() && !cabine.passagersVeulentDescendre()) {
 			if((cabine.intention() == 'v') && (cabine.étage.numéro() != immeuble.étageLePlusBas().numéro()))
 				echeancier.ajouter(new EvenementPassageCabinePalier(tps, immeuble.étage(cabine.étage.numéro()-1))); // étage.arrivéeSuivante() ?
 			else if((cabine.intention() == '^') && (cabine.étage.numéro() != immeuble.étageLePlusHaut().numéro()))
