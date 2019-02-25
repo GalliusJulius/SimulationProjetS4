@@ -5,18 +5,18 @@ public class EvenementPietonArrivePalier extends Evenement {
     */
 
     public void afficheDetails(StringBuilder buffer, Immeuble immeuble) {
-    	notYetImplemented();
+    	buffer.append("PAP");
     	
     }
 
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
-    	notYetImplemented();
+    	//notYetImplemented();
     }
 
     public EvenementPietonArrivePalier(long d) {
     	// Signature approximative et temporaire... juste pour que cela compile.
     	super(d);
-    	notYetImplemented();
+    	//notYetImplemented();
     }
     
 }
