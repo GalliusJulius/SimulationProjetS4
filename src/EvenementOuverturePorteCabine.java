@@ -36,7 +36,7 @@ public class EvenementOuverturePorteCabine extends Evenement {
 		//System.out.println(cabine.porteOuverte + " | "+ ! cabine.cabinePleine()+ " | "+étage.aDesPassagers()+ " | "+(i < étage.nbPassagersEtage(étage.numéro())));
 		echeancier.ajouter(new EvenementFermeturePorteCabine(date + i*tempsPourEntrerOuSortirDeLaCabine + tempsPourOuvrirOuFermerLesPortes));
 		
-		
+		// Améliore le nombre de passagers pris (comparé sur une longue période)
 		if(cabine.getPremierPassager(this.date) != null)
 			cabine.changerIntention(cabine.getPremierPassager(this.date).sens());
 		

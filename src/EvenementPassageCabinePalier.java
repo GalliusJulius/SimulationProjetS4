@@ -57,27 +57,27 @@ public class EvenementPassageCabinePalier extends Evenement {
 		//Gestion de l'ouverture des portes + intention
 		
 		if(Global.modeParfait && cabine.nbPassagersDansCabine() == 0 && étage.aDesPassagers()) {
-			echeancier.ajouter(new EvenementOuverturePorteCabine(date));
+			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourEntrerOuSortirDeLaCabine));
 			if(cabine.intention() != étage.getPremierPassager().sens()) {
 				cabine.changerIntention(étage.getPremierPassager().sens());
 			}
 		}
 		else if(Global.modeParfait && étage.aDesPassagers() && (cabine.intention() == étage.getPremierPassager().sens()) && !cabine.cabinePleine()){
-			echeancier.ajouter(new EvenementOuverturePorteCabine(date));
+			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourEntrerOuSortirDeLaCabine));
 		}
 		else if(!Global.modeParfait && étage.aDesPassagers()) {
-			echeancier.ajouter(new EvenementOuverturePorteCabine(date));
+			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourEntrerOuSortirDeLaCabine));
 		}
 		else if(cabine.passagersVeulentDescendre()) {
 			//System.out.println(étage);
-			echeancier.ajouter(new EvenementOuverturePorteCabine(date));
+			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourEntrerOuSortirDeLaCabine));
 		}
 		
 		//System.out.println(cabine.nbPassagersDansCabine());
 		
 		if(cabine.nbPassagersDansCabine() != 0) {
 			//System.out.println(cabine.getPremierPassager());
-			cabine.changerIntention(cabine.getPremierPassager(this.date).numéroDestination() > étage.numéro() ? '^' : 'v');
+			cabine.changerIntention(cabine.getPremierPassager(this.date + Global.tempsPourEntrerOuSortirDeLaCabine).numéroDestination() > étage.numéro() ? '^' : 'v');
 		}
 		
 		//System.out.println(étage.arrivéeSuivante());
