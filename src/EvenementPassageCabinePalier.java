@@ -41,20 +41,21 @@ public class EvenementPassageCabinePalier extends Evenement {
 			cabine.étage = immeuble.étage(cabine.étage.numéro()+1);
 		
 		//// A enlever dans les futures versions
-		/**
+		
 		if(cabine.étage.numéro() == immeuble.étageLePlusBas().numéro()) {
 			cabine.changerIntention('^');
 		}
 		else if(cabine.étage.numéro() == immeuble.étageLePlusHaut().numéro()){
 			cabine.changerIntention('v');
-		}*/
+		}
 		////
-		/**
+		
+		
 		if((cabine.intention() == 'v') && (cabine.étage.numéro() != immeuble.étageLePlusBas().numéro()))
 			echeancier.ajouter(new EvenementPassageCabinePalier(tps, immeuble.étage(cabine.étage.numéro()-1))); // étage.arrivéeSuivante() ?
 		else if((cabine.intention() == '^') && (cabine.étage.numéro() != immeuble.étageLePlusHaut().numéro()))
 			echeancier.ajouter(new EvenementPassageCabinePalier(tps, immeuble.étage(cabine.étage.numéro()+1))); // étage.arrivéeSuivante() ?
-		*/
+		
 		//Gestion de l'ouverture des portes + intention
 		
 		if(Global.modeParfait && cabine.nbPassagersDansCabine() == 0 && étage.aDesPassagers()) {
