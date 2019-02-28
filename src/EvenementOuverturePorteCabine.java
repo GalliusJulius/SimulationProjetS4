@@ -20,8 +20,7 @@ public class EvenementOuverturePorteCabine extends Evenement {
 		cabine.porteOuverte = true;
 		
 		if(cabine.passagersVeulentDescendre() && cabine.porteOuverte ) {
-			cabine.faireDescendrePassagers(immeuble, this.date);
-			
+			i = cabine.faireDescendrePassagers(immeuble, this.date);
 		}
 		
 		while(cabine.porteOuverte && (! cabine.cabinePleine()) && (étage.aDesPassagers())) {
