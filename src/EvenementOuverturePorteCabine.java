@@ -21,15 +21,19 @@ public class EvenementOuverturePorteCabine extends Evenement {
 		
 		if(cabine.passagersVeulentDescendre() && cabine.porteOuverte ) {
 			cabine.faireDescendrePassagers(immeuble, this.date);
+			
 		}
 		
 		while(cabine.porteOuverte && (! cabine.cabinePleine()) && (étage.aDesPassagers())) {
 			//System.out.println( cabine.getPremierPassager()+" | "+ cabine.porteOuverte + " | "+ ! cabine.cabinePleine()+ " | "+étage.aDesPassagers()+ " | "+(i < étage.nbPassagersEtage(étage.numéro())));
 			assert étage.getPremierPassager() != null;
+			long num = étage.getPremierPassager().getNumCrea();
 			boolean rep = cabine.faireMonterPassager(étage.getPremierPassager());
 			//System.out.println(rep);
-			if(rep)
+			if(rep) {
+				echeancier.enleverArriverPalier(num);
 				étage.suppPremierPassager();
+			}
 			i++;
 			//System.out.println(i);
 		}

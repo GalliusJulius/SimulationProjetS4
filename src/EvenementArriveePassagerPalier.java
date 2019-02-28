@@ -22,7 +22,7 @@ public class EvenementArriveePassagerPalier extends Evenement {
 	
 		étage.ajouter(p);
 		echeancier.ajouter(new EvenementArriveePassagerPalier(date + étage.arrivéeSuivante(), étage));
-		echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.délaiDePatienceAvantSportif));
+		echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.délaiDePatienceAvantSportif,p.getNumCrea()));
     }
 
 }

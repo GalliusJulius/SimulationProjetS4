@@ -71,4 +71,8 @@ public class Passager {
 	buffer.append(dateDépart);
     }
     
+    public long getNumCrea() {
+    	return this.numéroDeCréation;
+    }
+    
 }

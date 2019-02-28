@@ -68,5 +68,28 @@ public class Echeancier extends Global {
 	    index++;
 	}	
     }
+    
+    public void enleverArriverPalier(long passager) {
+    	boolean trouve = false;
+    	int i = 0;
+    	while(!trouve && i < this.listeEvenements.size()-1) {
+    		System.out.println(i);
+    		if(this.listeEvenements.get(i) instanceof EvenementPietonArrivePalier) {
+    			if (((EvenementPietonArrivePalier)this.listeEvenements.get(i)).getPassager() == passager){
+    				trouve = true;
+    			}
+    			else {
+    				i++;
+    			}
+    		}
+    		else {
+    			i++;
+    		}
+    	}
+    	System.out.println(trouve);
+    	if(trouve) {
+    		this.listeEvenements.remove(i);
+    	}
+    }
 
 }

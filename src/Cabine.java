@@ -80,6 +80,7 @@ public class Cabine extends Global {
 	    if(tableauPassager[i]!=null){
 		assert transporte(tableauPassager[i]);
 		if(tableauPassager[i].étageDestination() == étage){
+			//ajout : on enleve le pap associé
 		    immeuble.ajouterCumul(d-tableauPassager[i].dateDépart());
 		    immeuble.nombreTotalDesPassagersSortis++;
 		    tableauPassager[i]=null; 
