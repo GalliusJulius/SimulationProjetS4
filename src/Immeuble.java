@@ -105,24 +105,31 @@ public class Immeuble extends Global {
     	nombreTotalDesPassagersSortis++;
     }
     
-    public boolean passagerAuDessus(Etage e){
+    
+    //changement on retourne le nb détages de diff
+    public int passagerAuDessus(Etage e){
     	assert e != null;
+    	int res = 0;
     	for (int i=e.numéro()+1 ; i <= étageLePlusHaut().numéro() ; i++) {
 	    Etage et = étage(i);
+	    res++;
 	    if(et.aDesPassagers())
-		return true;
+		return res;
     	}
-    	return false;
+    	return -1;
     }
     
-    public boolean passagerEnDessous(Etage e){
+    
+    public int passagerEnDessous(Etage e){
     	assert e != null;
+    	int res = 0;
     	for (int i = étageLePlusBas().numéro() ; i < e.numéro() ; i++) {
 	    Etage et = étage(i);
+	    res++;
 	    if (et.aDesPassagers())
-  		return true;
+  		return res;
      	}
-    	return false;
+    	return -1;
     }
     
 }

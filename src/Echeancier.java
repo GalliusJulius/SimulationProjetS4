@@ -73,7 +73,6 @@ public class Echeancier extends Global {
     	boolean trouve = false;
     	int i = 0;
     	while(!trouve && i < this.listeEvenements.size()-1) {
-    		System.out.println(i);
     		if(this.listeEvenements.get(i) instanceof EvenementPietonArrivePalier) {
     			if (((EvenementPietonArrivePalier)this.listeEvenements.get(i)).getPassager() == passager){
     				trouve = true;
@@ -86,7 +85,6 @@ public class Echeancier extends Global {
     			i++;
     		}
     	}
-    	System.out.println(trouve);
     	if(trouve) {
     		this.listeEvenements.remove(i);
     	}
