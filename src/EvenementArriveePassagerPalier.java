@@ -24,7 +24,7 @@ public class EvenementArriveePassagerPalier extends Evenement {
 		étage.ajouter(p);
 		echeancier.ajouter(new EvenementArriveePassagerPalier(date + étage.arrivéeSuivante(), étage));
 		
-		if((cabine.porteOuverte) && (! cabine.cabinePleine())) {
+		if((cabine.porteOuverte) && (! cabine.cabinePleine()) && (étage.numéro() == cabine.étage.numéro())) {
 			boolean rep = cabine.faireMonterPassager(p);
 			if(rep) {
 				// On ajoute 5 à la date initiale

@@ -142,6 +142,7 @@ public class Etage extends Global {
     		passagers.remove(passagers.get(i));
     	}*/
     	
+    	//passagers.remove(0);
     	passagers.remove(0);
     	
     }
