@@ -62,6 +62,7 @@ public class Cabine extends Global {
     }
 
     public boolean faireMonterPassager(Passager p) { 
+    System.out.println(p.getNumCrea());
 	assert p != null;
 	assert ! transporte(p);
 	for (int i=0 ; i<tableauPassager.length ; i++) {
