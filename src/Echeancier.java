@@ -89,5 +89,27 @@ public class Echeancier extends Global {
     		this.listeEvenements.remove(i);
     	}
     }
+    
+    
+    public void modifFermeturePorte(long date) {
+    	boolean trouve = false;
+    	int i = 0;
+    	while(!trouve && i < this.listeEvenements.size()-1) {
+    		if(this.listeEvenements.get(i) instanceof EvenementFermeturePorteCabine) {
+    			if (((EvenementFermeturePorteCabine)this.listeEvenements.get(i)) != null){
+    				trouve = true;
+    			}
+    			else {
+    				i++;
+    			}
+    		}
+    		else {
+    			i++;
+    		}
+    	}
+    	if(trouve) {
+    		this.listeEvenements.set(i, new EvenementFermeturePorteCabine(this.listeEvenements.get(i).date + date));
+    	}
+    }
 
 }
