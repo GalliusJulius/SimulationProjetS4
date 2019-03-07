@@ -91,12 +91,13 @@ public class Echeancier extends Global {
     }
     
     
-    public void modifFermeturePorte(long date) {
+    public void modifFermeturePorte(long ajout) {
     	boolean trouve = false;
     	int i = 0;
     	while(!trouve && i < this.listeEvenements.size()-1) {
     		if(this.listeEvenements.get(i) instanceof EvenementFermeturePorteCabine) {
     			if (((EvenementFermeturePorteCabine)this.listeEvenements.get(i)) != null){
+    				((EvenementFermeturePorteCabine)this.listeEvenements.get(i)).setDate(this.listeEvenements.get(i).date + ajout);
     				trouve = true;
     			}
     			else {
@@ -106,9 +107,6 @@ public class Echeancier extends Global {
     		else {
     			i++;
     		}
-    	}
-    	if(trouve) {
-    		this.listeEvenements.set(i, new EvenementFermeturePorteCabine(this.listeEvenements.get(i).date + date));
     	}
     }
 
