@@ -66,6 +66,7 @@ public class EvenementPassageCabinePalier extends Evenement {
 		}
 		System.out.println(" cond3 "+(!Global.isModeParfait()  && étage.aDesPassagers()));
 		*/
+		/**
 		if(Global.modeParfait && cabine.nbPassagersDansCabine() == 0 && étage.aDesPassagers()) {
 			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
 		}
@@ -73,6 +74,16 @@ public class EvenementPassageCabinePalier extends Evenement {
 			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
 		}
 		else if(Global.modeParfait && étage.aDesPassagers()) {
+			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
+		}
+		else if(cabine.passagersVeulentDescendre()) {
+			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
+		}*/
+		
+		if(Global.modeParfait && étage.aDesPassagers() && (cabine.intention() == étage.getPremierPassager().sens()) && !cabine.cabinePleine()){
+			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
+		}
+		else if(étage.aDesPassagers()) {
 			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
 		}
 		else if(cabine.passagersVeulentDescendre()) {
