@@ -172,5 +172,13 @@ public class Etage extends Global {
     public void ajouterPieton(Passager p ) {
     	pietons.add(p);
     }
+    
+    public boolean estPieton(Passager p ) {
+    	return pietons.contains(p);
+    }
+    
+    public void supPieton(Passager p ) {
+    	pietons.remove(p);
+    }
 
 }

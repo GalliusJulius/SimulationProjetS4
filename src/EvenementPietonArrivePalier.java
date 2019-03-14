@@ -22,8 +22,14 @@ public class EvenementPietonArrivePalier extends Evenement {
 
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
     	if(!Global.isModeParfait()) {
-    		etage.remove(passager);
-    		etage.ajouterPieton(passager);
+    		if(etage.estPieton(passager)) {
+    			etage.supPieton(passager);
+    		}
+    		else {
+	    		etage.remove(passager);
+	    		etage.ajouterPieton(passager);
+	    		echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.tempsPourMonterOuDescendreUnEtageAPieds*Math.abs(passager.numéroDestination()-etage.numéro()),passager,etage));
+    		}
     	}
     }
     

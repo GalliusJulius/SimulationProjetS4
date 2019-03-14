@@ -33,7 +33,8 @@ public class EvenementArriveePassagerPalier extends Evenement {
 			} else {
 				echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.délaiDePatienceAvantSportif,p,étage));
 			}
-		} else
+		}
+		else
 			echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.délaiDePatienceAvantSportif,p,étage));
     }
 
