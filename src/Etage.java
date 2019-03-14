@@ -170,7 +170,6 @@ public class Etage extends Global {
     }
     
     public void ajouterPieton(Passager p ) {
-    	System.out.println("cc");
     	pietons.add(p);
     }
 
