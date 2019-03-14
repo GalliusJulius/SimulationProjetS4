@@ -31,10 +31,10 @@ public class EvenementArriveePassagerPalier extends Evenement {
 				echeancier.modifFermeturePorte(Global.tempsPourOuvrirOuFermerLesPortes);
 				étage.suppPremierPassager();
 			} else {
-				echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.délaiDePatienceAvantSportif,p.getNumCrea()));
+				echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.délaiDePatienceAvantSportif,p,étage));
 			}
 		} else
-			echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.délaiDePatienceAvantSportif,p.getNumCrea()));
+			echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.délaiDePatienceAvantSportif,p,étage));
     }
 
 }

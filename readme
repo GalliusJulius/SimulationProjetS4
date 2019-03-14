@@ -1,2 +1,3 @@
+
  scp -r src/ morelier1u@charlemagne.iutnc.univ-lorraine.fr:~/SIM 
  ~colnet5/18-19-SIM/run_1.sh X

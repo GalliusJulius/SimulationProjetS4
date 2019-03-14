@@ -4,13 +4,15 @@ public class EvenementPietonArrivePalier extends Evenement {
        Classe à faire complètement par vos soins.
     */
 
-	private long passager; 
+	private Passager passager; 
+	private Etage etage;
 	
-	public EvenementPietonArrivePalier(long d,long p) {
+	public EvenementPietonArrivePalier(long d,Passager p,Etage e) {
     	// Signature approximative et temporaire... juste pour que cela compile.
     	super(d);
     	//on associe un passager à l'évènement courant
     	passager=p;
+    	etage = e;
     }
 	
     public void afficheDetails(StringBuilder buffer, Immeuble immeuble) {
@@ -19,11 +21,14 @@ public class EvenementPietonArrivePalier extends Evenement {
     }
 
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
-    	//notYetImplemented();
+    	if(!Global.isModeParfait()) {
+    		etage.remove(passager);
+    		etage.ajouterPieton(passager);
+    	}
     }
     
     public long getPassager() {
-    	return this.passager;
+    	return this.passager.getNumCrea();
     }
     
 }

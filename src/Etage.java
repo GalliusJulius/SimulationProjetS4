@@ -92,6 +92,14 @@ public class Etage extends Global {
 	assert passager != null;
 	passagers.add(passager);
     }
+    
+    /**
+     * SUpprimer le passager num
+     * @param num de création
+     */
+    public void remove(Passager p) {
+    	passagers.remove(p);
+    }
 
     public long arrivéeSuivante() {
 	return poissonFrequenceArrivee.suivant();
@@ -158,6 +166,11 @@ public class Etage extends Global {
     	}
     	
     	return res;
+    }
+    
+    public void ajouterPieton(Passager p ) {
+    	System.out.println("cc");
+    	pietons.add(p);
     }
 
 }
