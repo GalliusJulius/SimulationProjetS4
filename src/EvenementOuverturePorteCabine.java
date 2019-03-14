@@ -57,6 +57,7 @@ public class EvenementOuverturePorteCabine extends Evenement {
 					cabine.changerIntention('v');
 			}
 		}
+			
 		assert cabine.porteOuverte;
     }
 
