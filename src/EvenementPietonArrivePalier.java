@@ -24,6 +24,8 @@ public class EvenementPietonArrivePalier extends Evenement {
     	if(!Global.isModeParfait()) {
     		if(etage.estPieton(passager)) {
     			etage.supPieton(passager);
+    			immeuble.ajouterCumul(date-passager.dateDépart());
+    		    immeuble.nombreTotalDesPassagersSortis++;
     		}
     		else {
 	    		etage.remove(passager);
