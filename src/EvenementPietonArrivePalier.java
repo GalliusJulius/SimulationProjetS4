@@ -28,13 +28,16 @@ public class EvenementPietonArrivePalier extends Evenement {
     				immeuble.ajouterCumul(date-passager.dateDépart());
     				immeuble.nombreTotalDesPassagersSortis++;
     			} else {
-    				echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.tempsPourMonterOuDescendreUnEtageAPieds,passager,etage));
+    				if(passager.sens() == '^')
+    					echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.tempsPourMonterOuDescendreUnEtageAPieds,passager,immeuble.getEtage(etage.numéro()+1)));
+    				else
+    					echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.tempsPourMonterOuDescendreUnEtageAPieds,passager,immeuble.getEtage(etage.numéro()-1)));
     			}
     		}
     		else {
 	    		etage.remove(passager);
 	    		etage.ajouterPieton(passager);
-	    		System.out.println(Math.abs(passager.numéroDestination()-etage.numéro()));
+	    		//System.out.println(Math.abs(passager.numéroDestination()-etage.numéro()));
 	    		echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.tempsPourMonterOuDescendreUnEtageAPieds,passager,etage));
     		}
     	}

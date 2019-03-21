@@ -131,5 +131,11 @@ public class Immeuble extends Global {
      	}
     	return -1;
     }
+
+	public Etage getEtage(int num) {
+		Etage res = tableauDesEtages[num+1];
+		
+		return res;
+	}
     
 }
