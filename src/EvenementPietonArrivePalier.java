@@ -23,21 +23,25 @@ public class EvenementPietonArrivePalier extends Evenement {
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
     	if(!Global.isModeParfait()) {
     		if(etage.estPieton(passager)) {
-    			Etage suivant = immeuble.getEtage(etage.numéro()+1);
+    			Etage suivant = null;
     			if(passager.sens() == 'v') suivant = immeuble.getEtage(etage.numéro()-1);
+    			else suivant = immeuble.getEtage(etage.numéro()+1);
     			//if((etage.numéro() == passager.numéroDestination()) || (etage.numéro() == passager.numéroDestination()+1) || (etage.numéro() == passager.numéroDestination()-1)) {
-    			if(suivant == passager.étageDestination())
+    			if(suivant == passager.étageDestination()){
     				etage.supPieton(passager);
     				immeuble.ajouterCumul(date-passager.dateDépart());
     				immeuble.nombreTotalDesPassagersSortis++;
-    			} else {
+    			}
+    			else {
+    				etage.supPieton(passager);
+    				suivant.ajouterPieton(passager);
     				echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.tempsPourMonterOuDescendreUnEtageAPieds,passager,suivant));
     			}
     		}
     		else {
 	    		etage.remove(passager);
 	    		etage.ajouterPieton(passager);
-	    		System.out.println(Math.abs(passager.numéroDestination()-etage.numéro()));
+	    		//System.out.println(Math.abs(passager.numéroDestination()-etage.numéro()));
 	    		echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.tempsPourMonterOuDescendreUnEtageAPieds,passager,etage));
     		}
     	}
