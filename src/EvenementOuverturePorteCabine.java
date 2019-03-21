@@ -40,23 +40,35 @@ public class EvenementOuverturePorteCabine extends Evenement {
 		echeancier.ajouter(new EvenementFermeturePorteCabine(date + i*tempsPourEntrerOuSortirDeLaCabine + tempsPourOuvrirOuFermerLesPortes));
 		
 		// Améliore le nombre de passagers pris (comparé sur une longue période)
-		if(cabine.getPremierPassager(this.date) != null)
-			cabine.changerIntention(cabine.getPremierPassager(this.date).sens());
-		else {
+		if(Global.isModeParfait()) {
+			if(cabine.getPremierPassager(this.date) != null)
+				cabine.changerIntention(cabine.getPremierPassager(this.date).sens());
+			else {
+				int dessus = immeuble.passagerAuDessus(étage);
+				int dessous = immeuble.passagerEnDessous(étage);
+				if(dessus != -1 || dessous !=-1) {
+					if(dessus == -1) 
+						cabine.changerIntention('v');
+					else if(dessous == -1) 
+						cabine.changerIntention('^');
+					else if(dessus < dessous) 
+						cabine.changerIntention('^');
+					
+					else
+						cabine.changerIntention('v');
+				}
+			}
+		} else {
 			int dessus = immeuble.passagerAuDessus(étage);
 			int dessous = immeuble.passagerEnDessous(étage);
-			if(dessus != -1 || dessous !=-1) {
-				if(dessus == -1) 
-					cabine.changerIntention('v');
-				else if(dessous == -1) 
-					cabine.changerIntention('^');
-				else if(dessus < dessous) 
-					cabine.changerIntention('^');
-				
-				else
-					cabine.changerIntention('v');
+			
+			if((cabine.intention() == '^') && (dessus == -1)) {
+				cabine.changerIntention('v');
+			} else if((cabine.intention() == 'v') && (dessous == -1)) {
+				cabine.changerIntention('^');
 			}
 		}
+		
 			
 		assert cabine.porteOuverte;
     }

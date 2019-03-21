@@ -73,10 +73,10 @@ public class EvenementPassageCabinePalier extends Evenement {
 		if(Global.modeParfait && étage.aDesPassagers() && (cabine.intention() == étage.getPremierPassager().sens()) && !cabine.cabinePleine()){
 			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
 		}
-		else if(étage.aDesPassagers()) {
+		else if(cabine.passagersVeulentDescendre()) {
 			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
 		}
-		else if(cabine.passagersVeulentDescendre()) {
+		else if((étage.aDesPassagers()) && (! cabine.cabinePleine())) {
 			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
 		}
     }

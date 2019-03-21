@@ -162,4 +162,8 @@ public class Cabine extends Global {
     	
     	return tableauPassager[numP];
     }
+
+	public Passager getPassager(int num) {
+		return tableauPassager[num];
+	}
 }
