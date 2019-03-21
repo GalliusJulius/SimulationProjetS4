@@ -23,14 +23,19 @@ public class EvenementPietonArrivePalier extends Evenement {
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
     	if(!Global.isModeParfait()) {
     		if(etage.estPieton(passager)) {
-    			etage.supPieton(passager);
-    			immeuble.ajouterCumul(date-passager.dateDépart());
-    		    immeuble.nombreTotalDesPassagersSortis++;
+    			if((etage.numéro() == passager.numéroDestination()) || (etage.numéro() == passager.numéroDestination()+1) || (etage.numéro() == passager.numéroDestination()-1)) {
+    				etage.supPieton(passager);
+    				immeuble.ajouterCumul(date-passager.dateDépart());
+    				immeuble.nombreTotalDesPassagersSortis++;
+    			} else {
+    				echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.tempsPourMonterOuDescendreUnEtageAPieds,passager,etage));
+    			}
     		}
     		else {
 	    		etage.remove(passager);
 	    		etage.ajouterPieton(passager);
-	    		echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.tempsPourMonterOuDescendreUnEtageAPieds*Math.abs(passager.numéroDestination()-etage.numéro()),passager,etage));
+	    		System.out.println(Math.abs(passager.numéroDestination()-etage.numéro()));
+	    		echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.tempsPourMonterOuDescendreUnEtageAPieds,passager,etage));
     		}
     	}
     }
