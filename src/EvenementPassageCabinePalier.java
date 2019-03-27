@@ -40,7 +40,7 @@ public class EvenementPassageCabinePalier extends Evenement {
 		else if((cabine.intention() == '^') && (cabine.étage.numéro() != immeuble.étageLePlusHaut().numéro()))
 			cabine.étage = immeuble.étage(cabine.étage.numéro()+1);
 		
-		if(!cabine.étage.aDesPassagers() && !cabine.passagersVeulentDescendre()) {
+		if(!étage.aDesPassagers() && !cabine.passagersVeulentDescendre()) {
 			if((cabine.intention() == 'v') && (cabine.étage.numéro() != immeuble.étageLePlusBas().numéro()))
 				echeancier.ajouter(new EvenementPassageCabinePalier(tps, immeuble.étage(cabine.étage.numéro()-1))); // étage.arrivéeSuivante() ?
 			else if((cabine.intention() == '^') && (cabine.étage.numéro() != immeuble.étageLePlusHaut().numéro()))
@@ -64,4 +64,6 @@ public class EvenementPassageCabinePalier extends Evenement {
 			if(étage.aDesPassagers()&&!cabine.cabinePleine()&&nb==-1)echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
 		}
     }
+   
+
 }
