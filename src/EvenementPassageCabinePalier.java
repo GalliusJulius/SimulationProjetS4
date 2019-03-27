@@ -53,9 +53,25 @@ public class EvenementPassageCabinePalier extends Evenement {
 			int nb =-1;
 			if(cabine.intention() == '^') nb=immeuble.passagerAuDessus(cabine.étage);
 			else nb = immeuble.passagerEnDessous(cabine.étage);
-			if(étage.aDesPassagers()&&!cabine.cabinePleine()&&nb==-1) {
+			
+			// Cas très spécifique (à revoir...)
+			if((((cabine.intention() == '^') && (immeuble.passagerAuDessus(cabine.étage) == -1) && (immeuble.passagerEnDessous(cabine.étage) != -1))
+					|| ((cabine.intention() == 'v') && (immeuble.passagerEnDessous(cabine.étage) == -1) && (immeuble.passagerAuDessus(cabine.étage) != -1))) && (cabine.nbPassagersDansCabine() == 0) && (!étage.aDesPassagers())){
+				if((cabine.intention() == '^') && (immeuble.passagerAuDessus(cabine.étage) == -1))
+					cabine.changerIntention('v');
+				else
+					cabine.changerIntention('^');
+			}
+			
+			
+			if((!Global.isModeParfait())&&étage.aDesPassagers()&&!cabine.cabinePleine()&&nb==-1) {
 				echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
 				monter=true;
+			} else if((Global.isModeParfait())&&étage.aDesPassagers()&&!cabine.cabinePleine()) {
+				if(((cabine.nbPassagersDansCabine() != 0) && (étage.memeIntention(cabine.intention()))) || ((nb == -1) && (cabine.nbPassagersDansCabine() == 0))) {
+					echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
+					monter=true;
+				}
 			}
 		}
 		//System.out.println(monter);
