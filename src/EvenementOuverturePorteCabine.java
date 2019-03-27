@@ -61,16 +61,27 @@ public class EvenementOuverturePorteCabine extends Evenement {
 		} else {
 			int dessus = immeuble.passagerAuDessus(étage);
 			int dessous = immeuble.passagerEnDessous(étage);
-			
-			if((cabine.intention() == '^') && (dessus == -1)) {
+			if((cabine.intention() == '^') && (dessus == -1) && !passagerVeulentDescendre(cabine.intention(),cabine)) {
 				cabine.changerIntention('v');
-			} else if((cabine.intention() == 'v') && (dessous == -1)) {
+			} else if((cabine.intention() == 'v') && (dessous == -1) && !passagerVeulentDescendre(cabine.intention(),cabine)) {
 				cabine.changerIntention('^');
 			}
 		}
 		
 			
 		assert cabine.porteOuverte;
+    }
+    
+    public boolean passagerVeulentDescendre(char intent,Cabine cabine) {
+    	boolean res = false;
+    	for(int i = 0 ; i<cabine.tableauPassager.length;i++) {
+    		Passager p = cabine.tableauPassager[i];
+    		if(p!=null) {
+	    		if(intent == '^' && p.étageDestination().numéro()>cabine.étage.numéro()) return true;
+	    		else if(intent == 'v' && p.étageDestination().numéro() <cabine.étage.numéro()) return true;
+    		}
+    	}
+    	return res;
     }
 
 }

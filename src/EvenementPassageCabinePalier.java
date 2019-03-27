@@ -47,28 +47,6 @@ public class EvenementPassageCabinePalier extends Evenement {
 				echeancier.ajouter(new EvenementPassageCabinePalier(tps, immeuble.étage(cabine.étage.numéro()+1))); // étage.arrivéeSuivante() ?
 		}
 		//Gestion de l'ouverture des portes + intention
-		/**
-		System.out.println("descendre : "+cabine.passagersVeulentDescendre());
-		System.out.println(" cond1 "+(Global.isModeParfait() && (cabine.nbPassagersDansCabine() == 0 && étage.aDesPassagers())));
-		if(étage.aDesPassagers()) {
-			boolean sens = (cabine.intention() == étage.getPremierPassager().sens());
-			System.out.println(" cond2 : "+(Global.isModeParfait()  && étage.aDesPassagers() && sens));
-		}
-		System.out.println(" cond3 "+(!Global.isModeParfait()  && étage.aDesPassagers()));
-		*/
-		/**
-		if(Global.modeParfait && cabine.nbPassagersDansCabine() == 0 && étage.aDesPassagers()) {
-			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
-		}
-		else if(Global.modeParfait && étage.aDesPassagers() && (cabine.intention() == étage.getPremierPassager().sens()) && !cabine.cabinePleine()){
-			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
-		}
-		else if(Global.modeParfait && étage.aDesPassagers()) {
-			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
-		}
-		else if(cabine.passagersVeulentDescendre()) {
-			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
-		}*/
 		
 		if(Global.modeParfait && étage.aDesPassagers() && (cabine.intention() == étage.getPremierPassager().sens()) && !cabine.cabinePleine()){
 			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
@@ -76,8 +54,14 @@ public class EvenementPassageCabinePalier extends Evenement {
 		else if(cabine.passagersVeulentDescendre()) {
 			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
 		}
-		else if((étage.aDesPassagers()) && (! cabine.cabinePleine())) {
+		else if((étage.aDesPassagers()) && (! cabine.cabinePleine())&& ! Global.isModeParfait()){
 			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
+		}
+		else {
+			int nb =-1;
+			if(cabine.intention() == '^') nb=immeuble.passagerAuDessus(cabine.étage);
+			else nb = immeuble.passagerEnDessous(cabine.étage);
+			if(étage.aDesPassagers()&&!cabine.cabinePleine()&&nb==-1)echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
 		}
     }
 }

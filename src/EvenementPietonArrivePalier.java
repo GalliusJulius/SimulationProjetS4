@@ -21,7 +21,7 @@ public class EvenementPietonArrivePalier extends Evenement {
     }
 
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
-    	if(!Global.isModeParfait()) {
+    	//if(Global.isModeParfait()) {
     		if(etage.estPieton(passager)) {
     			Etage suivant = null;
     			if(passager.sens() == 'v') suivant = immeuble.getEtage(etage.numéro()-1);
@@ -45,7 +45,7 @@ public class EvenementPietonArrivePalier extends Evenement {
 	    		echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.tempsPourMonterOuDescendreUnEtageAPieds,passager,etage));
     		}
     	}
-    }
+    //}
     
     public long getPassager() {
     	return this.passager.getNumCrea();
