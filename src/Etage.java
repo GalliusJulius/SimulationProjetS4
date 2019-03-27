@@ -221,4 +221,12 @@ public class Etage extends Global {
 		passagers.remove(res);
 	}
 
+	public boolean memeIntention(char intention) {
+		boolean res= false;
+		for(Passager p : this.passagers) {
+			if(p.sens()==intention)res=true;
+		}
+		return res;
+	}
+
 }

@@ -55,12 +55,14 @@ public class EvenementOuverturePorteCabine extends Evenement {
 				}
 			}
 		} else {
-			int dessus = immeuble.passagerAuDessus(étage);
-			int dessous = immeuble.passagerEnDessous(étage);
-			if((cabine.intention() == '^') && (dessus == -1) && !passagerVeulentDescendre(cabine.intention(),cabine)) {
-				cabine.changerIntention('v');
-			} else if((cabine.intention() == 'v') && (dessous == -1) && !passagerVeulentDescendre(cabine.intention(),cabine)) {
-				cabine.changerIntention('^');
+			if(!(étage.aDesPassagers() && étage.memeIntention(cabine.intention()))) {
+				int dessus = immeuble.passagerAuDessus(étage);
+				int dessous = immeuble.passagerEnDessous(étage);
+				if((cabine.intention() == '^') && (dessus == -1) && !passagerVeulentDescendre(cabine.intention(),cabine)) {
+					cabine.changerIntention('v');
+				} else if((cabine.intention() == 'v') && (dessous == -1) && !passagerVeulentDescendre(cabine.intention(),cabine)) {
+					cabine.changerIntention('^');
+				}
 			}
 		}
 		
