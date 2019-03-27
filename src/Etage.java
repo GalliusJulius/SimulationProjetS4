@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Etage extends Global {
     /* Dans cette classe, vous pouvez ajouter/enlever/modifier/corriger les méthodes, mais vous ne
@@ -169,6 +170,34 @@ public class Etage extends Global {
     	return res;
     }
     
+    /**
+    public char meilleurIntention(Cabine cabine) {
+    	char res = this.passagers.get(0).sens();
+    	int best = Math.abs(cabine.étage.numéro-this.passagers.get(0).étageDestination().numéro);
+    	for(int i =1;i<this.nbPassagers();i++) {
+    		if(best >Math.abs(cabine.étage.numéro-this.passagers.get(i).étageDestination().numéro)) {
+    			res = this.passagers.get(i).sens();
+    		}
+    	}
+    	return res;
+    }
+    */
+    public char meilleurIntention(Cabine cabine) {
+    	char res = this.passagers.get(0).sens();
+    	for(int i =1;i<this.nbPassagers();i++) {
+    		if(this.passagers.get(i).sens() == cabine.intention()) res = cabine.intention();
+    	}
+    	return res;
+    }
+    
+    public List<Passager> getPassagerIntention(char intent) {
+    	List<Passager> p = new ArrayList<Passager>();
+    	for(Passager temp : this.passagers) {
+    		if(temp.sens() == intent) p.add(temp);
+    	}
+    	return p;
+    }
+    
     public void ajouterPieton(Passager p ) {
     	pietons.add(p);
     }
@@ -180,5 +209,16 @@ public class Etage extends Global {
     public void supPieton(Passager p ) {
     	pietons.remove(p);
     }
+
+	public void supprimerPassager(long num) {
+		int res =0;
+		boolean continuer = true;
+		List<Passager> temp = passagers;
+		while(continuer && res <temp.size()) {
+    		if(temp.get(res).getNumCrea() == num) continuer = false;
+    		else res++;
+		}
+		passagers.remove(res);
+	}
 
 }

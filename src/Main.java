@@ -58,7 +58,6 @@ public class Main extends Global {
                 loop--;
             }
             Evenement evenement = échéancier.retourneEtEnlevePremier();
-            assert pasDeRetourDansLePassé(evenement.date) : "Retour dans le passé:" + memoDate + "/" + evenement.date;
             evenement.traiter(immeuble, échéancier);
             nbPasSimul++;
         }

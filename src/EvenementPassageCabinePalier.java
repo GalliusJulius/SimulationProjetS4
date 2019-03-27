@@ -24,7 +24,7 @@ public class EvenementPassageCabinePalier extends Evenement {
 		
 		long tps;
 		
-		if((cabine.passagersVeulentDescendre()) || (étage.aDesPassagers())) {
+		if((cabine.passagersVeulentDescendre()) || (étage.aDesPassagers() &&!Global.modeParfait)) {
 			tps = date + Global.tempsPourBougerLaCabineDUnEtage + Global.tempsPourEntrerOuSortirDeLaCabine * (cabine.nbPassagersVeulentDescendre(cabine.étage.numéro()) + étage.nbPassagersEtage(étage.numéro()) + tempsPourOuvrirOuFermerLesPortes); // +1 ?
 		} else {
 			tps = date + Global.tempsPourBougerLaCabineDUnEtage;

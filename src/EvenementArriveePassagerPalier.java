@@ -23,8 +23,7 @@ public class EvenementArriveePassagerPalier extends Evenement {
 	
 		étage.ajouter(p);
 		echeancier.ajouter(new EvenementArriveePassagerPalier(date + étage.arrivéeSuivante(), étage));
-		
-		if((cabine.porteOuverte) && (! cabine.cabinePleine()) && (cabine.étage.numéro() == p.étageDépart().numéro())) {
+		if((cabine.porteOuverte) && (! cabine.cabinePleine()) && (cabine.étage.numéro() == p.étageDépart().numéro() && (!Global.modeParfait||Global.isModeParfait() && cabine.intention() == p.sens()))) {
 			boolean rep = cabine.faireMonterPassager(p);
 			if(rep) {
 				// On ajoute 5 à la date initiale
