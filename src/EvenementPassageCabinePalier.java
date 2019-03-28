@@ -37,7 +37,7 @@ public class EvenementPassageCabinePalier extends Evenement {
 			cabine.étage = immeuble.étage(cabine.étage.numéro()+1);
 		
 		boolean monter=false;
-		if(Global.modeParfait && étage.aDesPassagers() && (cabine.intention() == étage.getPremierPassager().sens()) && !cabine.cabinePleine()){
+		if(Global.modeParfait && étage.aDesPassagers() && (!étage.getPassagerIntention(cabine.intention()).isEmpty()) && !cabine.cabinePleine()){
 			echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
 			monter=true;
 		}
