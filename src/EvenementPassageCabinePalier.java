@@ -58,23 +58,16 @@ public class EvenementPassageCabinePalier extends Evenement {
 				monter=true;
 			}
 		}
-		//System.out.println(monter);
 		if((!étage.aDesPassagers() || (Global.isModeParfait() && !monter))&& !cabine.passagersVeulentDescendre()) {
-			//System.out.println("ici");
+
 			if((cabine.intention() == 'v') && (cabine.étage.numéro() != immeuble.étageLePlusBas().numéro())) {
-				//System.out.println("EVENEMNT");
-				//echeancier.affiche(new StringBuilder(),immeuble);
+
 				echeancier.ajouter(new EvenementPassageCabinePalier(tps, immeuble.étage(cabine.étage.numéro()-1))); // étage.arrivéeSuivante() ?
-				//echeancier.affiche(new StringBuilder(),immeuble);
 			}
 			else if((cabine.intention() == '^') && (cabine.étage.numéro() != immeuble.étageLePlusHaut().numéro())){
-				//System.out.println("EVENEMNT");
-				//echeancier.affiche(new StringBuilder(),immeuble);
 				echeancier.ajouter(new EvenementPassageCabinePalier(tps, immeuble.étage(cabine.étage.numéro()+1))); // étage.arrivéeSuivante() ?
-				//echeancier.affiche(new StringBuilder(),immeuble);
 			}
 		}
-		//Gestion de l'ouverture des portes + intention
 		
 		
     }
