@@ -54,14 +54,41 @@ public class EvenementPassageCabinePalier extends Evenement {
 			if(cabine.intention() == '^') nb=immeuble.passagerAuDessus(cabine.étage);
 			else nb = immeuble.passagerEnDessous(cabine.étage);
 			
-			// Cas très spécifique (à revoir...)
+			// Cas très spécifique pour les 2 modes
 			if((((cabine.intention() == '^') && (immeuble.passagerAuDessus(cabine.étage) == -1) && (immeuble.passagerEnDessous(cabine.étage) != -1))
-					|| ((cabine.intention() == 'v') && (immeuble.passagerEnDessous(cabine.étage) == -1) && (immeuble.passagerAuDessus(cabine.étage) != -1))) && (cabine.nbPassagersDansCabine() == 0) && (!étage.aDesPassagers())){
+					|| ((cabine.intention() == 'v') && (immeuble.passagerEnDessous(cabine.étage) == -1) && (immeuble.passagerAuDessus(cabine.étage) != -1)))
+					&& (cabine.nbPassagersDansCabine() == 0) && (!étage.aDesPassagers())){
+				
 				if((cabine.intention() == '^') && (immeuble.passagerAuDessus(cabine.étage) == -1))
 					cabine.changerIntention('v');
 				else
 					cabine.changerIntention('^');
 			}
+			
+			if(((!Global.isModeParfait()) && (!étage.aDesPassagers()))
+			     && (((cabine.intention() == 'v') && (this.étage.numéro() == immeuble.étageLePlusBas().numéro())) || ((cabine.intention() == '^') && (this.étage.numéro() == immeuble.étageLePlusHaut().numéro())))) {
+					
+				if((cabine.intention() == 'v') && (this.étage.numéro() == immeuble.étageLePlusBas().numéro()))
+						cabine.changerIntention('^');
+					else
+						cabine.changerIntention('v');
+			} else if((!Global.isModeParfait())&& (!étage.aDesPassagers()) && ((cabine.nbPassagersDansCabine() == 0) || (cabine.intentionUnie() == '^') || (cabine.intentionUnie() == 'v'))){
+				int dessus = immeuble.passagerAuDessus(étage);
+				int dessous = immeuble.passagerEnDessous(étage);
+				if((cabine.intentionUnie() == 'v') && (dessus == -1) && !cabine.passagerVeulentDescendre(cabine.intention(),cabine)) {
+					cabine.changerIntention('v');
+				} else if((cabine.intentionUnie() == '^') && (dessous == -1) && !cabine.passagerVeulentDescendre(cabine.intention(),cabine)) {
+					cabine.changerIntention('^');
+				}
+			}
+			
+			
+			
+			/*if((this.intention() == '^') && (dessus == -1) && !passagerVeulentDescendre(this.intention(),this)) {
+				this.changerIntention('v');
+			} else if((this.intention() == 'v') && (dessous == -1) && !passagerVeulentDescendre(this.intention(),this)) {
+				this.changerIntention('^');
+			}*/
 			
 			
 			if((!Global.isModeParfait())&&étage.aDesPassagers()&&!cabine.cabinePleine()&&nb==-1) {
@@ -72,6 +99,9 @@ public class EvenementPassageCabinePalier extends Evenement {
 					echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
 					monter=true;
 				}
+			} else if((!Global.isModeParfait()) && (étage.aDesPassagers())) {
+				echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
+				monter=true;
 			}
 		}
 		//System.out.println(monter);

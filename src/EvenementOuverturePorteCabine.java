@@ -23,7 +23,6 @@ public class EvenementOuverturePorteCabine extends Evenement {
 			i = cabine.faireDescendrePassagers(immeuble, this.date);
 		}
 		
-		// Améliore le nombre de passagers pris (comparé sur une longue période)
 		cabine.calculerIntention(this.date, immeuble);
 		
 		i += cabine.monterPassagers(echeancier);
