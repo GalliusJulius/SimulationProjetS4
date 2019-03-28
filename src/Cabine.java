@@ -166,4 +166,134 @@ public class Cabine extends Global {
 	public Passager getPassager(int num) {
 		return tableauPassager[num];
 	}
+	
+	
+	public char intentionUnie() {
+		char res = ' ';
+		
+		for(int i = 0; i < tableauPassager.length; i++) {
+    		if(tableauPassager[i] != null) {
+    			if(((res != ' ') && (tableauPassager[i].sens() == res)) || res == ' ') {
+    				res = tableauPassager[i].sens();
+    			} else if((res != ' ') && (tableauPassager[i].sens() != res)) {
+    				return '-';
+    			}
+    		} 
+    	}
+		
+		return res;
+	}
+	
+	
+	public void calculerIntention(long date, Immeuble immeuble) {
+		if(Global.isModeParfait()) {
+			if(this.getPremierPassager(date) != null) {
+				this.changerIntention(this.getPremierPassager(date).sens());
+			}
+			else {
+				int dessus = immeuble.passagerAuDessus(étage);
+				int dessous = immeuble.passagerEnDessous(étage);
+				if(dessus == -1 && dessous == -1 && étage.aDesPassagers()) {
+					this.changerIntention(étage.meilleurIntention(this));
+				}
+				else {
+					
+					
+					if(dessus == -1 || dessous ==-1) {
+						if((!étage.aDesPassagers()||this.nbPassagersDansCabine()==0) && (!étage.memeIntention(this.intention)) && !((dessus == -1) && (dessous == -1))) {
+							if(dessus == -1) 
+								this.changerIntention('v');
+							else if(dessous == -1) 
+								this.changerIntention('^');
+							else if(dessus < dessous) 
+								this.changerIntention('^');
+							else 
+								this.changerIntention('v');
+						// Cas spécifique : si tout en bas ou tout en haut de l'immeuble et aucun passager dans l'immeuble et dans la cabine
+						} else if(((Global.isModeParfait()) && (!étage.aDesPassagers()) && (this.nbPassagersDansCabine() == 0))
+							&& (((this.intention() == 'v') && (this.étage.numéro() == immeuble.étageLePlusBas().numéro())) || ((this.intention() == '^') && (this.étage.numéro() == immeuble.étageLePlusHaut().numéro())))) {
+								if((this.intention() == 'v') && (this.étage.numéro() == immeuble.étageLePlusBas().numéro()))
+									this.changerIntention('^');
+								else
+									this.changerIntention('v');
+						}
+					} else if(dessus == -1 && dessous==-1) {
+						if((this.intention() == '^') && !passagerVeulentDescendre(this.intention(),this)) {
+							this.changerIntention('v');
+						} else if((this.intention() == 'v') && !passagerVeulentDescendre(this.intention(),this)) {
+							this.changerIntention('^');
+						}
+					}
+				}
+			}
+		} else {
+			
+			if(!(étage.aDesPassagers() && étage.memeIntention(this.intention()))) {
+				int dessus = immeuble.passagerAuDessus(étage);
+				int dessous = immeuble.passagerEnDessous(étage);
+				
+				// Cas spécifique à exclure :
+				if (! ((!étage.aDesPassagers()) && (dessus == -1) && (dessous == -1) && (this.nbPassagersDansCabine() == 0))) {
+					if((this.intention() == '^') && (dessus == -1) && !passagerVeulentDescendre(this.intention(),this)) {
+						this.changerIntention('v');
+					} else if((this.intention() == 'v') && (dessous == -1) && !passagerVeulentDescendre(this.intention(),this)) {
+						this.changerIntention('^');
+					}
+				} else {
+					if((this.intention() == 'v') && (this.étage.numéro() == immeuble.étageLePlusBas().numéro()))
+						this.changerIntention('^');
+					else if((this.intention() == '^') && (this.étage.numéro() == immeuble.étageLePlusHaut().numéro()))
+						this.changerIntention('v');
+				}
+				
+			}
+		}
+		
+	}
+	
+	
+	// TODO Méthode à revoir (supprimer les paramètres inutilies)
+	public boolean passagerVeulentDescendre(char intent,Cabine cabine) {
+    	boolean res = false;
+    	for(int i = 0 ; i<cabine.tableauPassager.length;i++) {
+    		Passager p = cabine.tableauPassager[i];
+    		if(p!=null) {
+	    		if(intent == '^' && p.étageDestination().numéro()>cabine.étage.numéro()) return true;
+	    		else if(intent == 'v' && p.étageDestination().numéro() <cabine.étage.numéro()) return true;
+    		}
+    	}
+    	return res;
+    }
+
+	public int monterPassagers(Echeancier echeancier) {
+		int i = 0;
+		
+		if(!Global.isModeParfait()) {
+			while(this.porteOuverte && (! this.cabinePleine()) && (étage.aDesPassagers())) {
+				//System.out.println( cabine.getPremierPassager()+" | "+ cabine.porteOuverte + " | "+ ! cabine.cabinePleine()+ " | "+étage.aDesPassagers()+ " | "+(i < étage.nbPassagersEtage(étage.numéro())));
+				assert étage.getPremierPassager() != null;
+				long num = étage.getPremierPassager().getNumCrea();
+				boolean rep = this.faireMonterPassager(étage.getPremierPassager());
+				if(rep) {
+					echeancier.enleverArriverPalier(num);
+					étage.suppPremierPassager();
+				}
+				i++;
+			}
+		}
+		else {
+			for(Passager p : étage.getPassagerIntention(this.intention())) {
+				assert étage.getPremierPassager() != null;
+				long num = p.getNumCrea();
+				boolean rep = this.faireMonterPassager(p);
+				if(rep) {
+					echeancier.enleverArriverPalier(num);
+					étage.supprimerPassager(num);
+				}
+				i++;
+			}
+		}
+		
+		return i;
+	}
 }

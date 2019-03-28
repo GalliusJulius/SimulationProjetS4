@@ -28,7 +28,8 @@ public class EvenementArriveePassagerPalier extends Evenement {
 			if(rep) {
 				// On ajoute 5 à la date initiale
 				echeancier.modifFermeturePorte(Global.tempsPourOuvrirOuFermerLesPortes);
-				étage.suppPremierPassager();
+				//étage.suppPremierPassager();
+				étage.supprimerPassager(p.getNumCrea());
 			} else {
 				echeancier.ajouter(new EvenementPietonArrivePalier(date+Global.délaiDePatienceAvantSportif,p,étage));
 			}
