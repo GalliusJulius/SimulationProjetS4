@@ -18,11 +18,13 @@ public class EvenementArriveePassagerPalier extends Evenement {
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
 		assert étage != null;
 		assert immeuble.étage(étage.numéro()) == étage;
+		
 		Cabine cabine = immeuble.cabine;
 		Passager p = new Passager(date, étage, immeuble);
 	
 		étage.ajouter(p);
 		echeancier.ajouter(new EvenementArriveePassagerPalier(date + étage.arrivéeSuivante(), étage));
+		
 		if((cabine.porteOuverte) && (! cabine.cabinePleine()) && (cabine.étage.numéro() == p.étageDépart().numéro() && (!Global.modeParfait||Global.isModeParfait() && cabine.intention() == p.sens()))) {
 			boolean rep = cabine.faireMonterPassager(p);
 			if(rep) {
