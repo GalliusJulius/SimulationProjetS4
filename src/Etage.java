@@ -129,29 +129,10 @@ public class Etage extends Global {
     }
     
     public Passager getPremierPassager() {
-    	/*if(aDesPassagers()) {
-    		int i = 0;
-    		while(passagers.get(i) == null) {
-    			i++;
-    		}
-    		return passagers.get(i);
-    	}
-    	
-    	return null;*/
-    	
     	return passagers.get(0);
     }
     
     public void suppPremierPassager() {
-    	/*if(aDesPassagers()) {
-    		int i = 0;
-    		while(passagers.get(i) == null) {
-    			i++;
-    		}
-    		passagers.remove(passagers.get(i));
-    	}*/
-    	
-    	//passagers.remove(0);
     	passagers.remove(0);
     	
     }
@@ -170,18 +151,7 @@ public class Etage extends Global {
     	return res;
     }
     
-    /**
-    public char meilleurIntention(Cabine cabine) {
-    	char res = this.passagers.get(0).sens();
-    	int best = Math.abs(cabine.étage.numéro-this.passagers.get(0).étageDestination().numéro);
-    	for(int i =1;i<this.nbPassagers();i++) {
-    		if(best >Math.abs(cabine.étage.numéro-this.passagers.get(i).étageDestination().numéro)) {
-    			res = this.passagers.get(i).sens();
-    		}
-    	}
-    	return res;
-    }
-    */
+    
     public char meilleurIntention(Cabine cabine) {
     	char res = this.passagers.get(0).sens();
     	for(int i =1;i<this.nbPassagers();i++) {
